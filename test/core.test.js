@@ -62,6 +62,16 @@ test("analyzeWithGemini sends key in header, not URL, and parses reply", async (
   assert.equal(seen.opts.headers["x-goog-api-key"], "TESTKEY");
 });
 
+test("analyzeWithGemini passes a timeout signal and reports a timeout clearly", async () => {
+  let signal;
+  const fake = async (url, opts) => {
+    signal = opts.signal;
+    throw new DOMException("timed out", "TimeoutError");
+  };
+  await assert.rejects(() => analyzeWithGemini("j", "p", "TESTKEY", fake), /did not answer within 30 seconds/);
+  assert.ok(signal instanceof AbortSignal);
+});
+
 test("analyzeWithGemini error message has status but no key", async () => {
   const fake = async () => ({ ok: false, status: 403 });
   await assert.rejects(() => analyzeWithGemini("j", "p", "TESTKEY", fake), (e) => /403/.test(e.message) && !e.message.includes("TESTKEY"));
