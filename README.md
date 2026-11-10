@@ -29,9 +29,8 @@ The model name lives in `src/config.js` (`MODEL`). Google retires model names ov
 |---|---|
 | `activeTab` | Gives temporary access to the current tab only after you press the shortcut or click the icon. No access to other tabs, no always-on access. |
 | `storage` | Saves your API key and profile in `chrome.storage.local` on your machine. |
-| `scripting` | Needed to call `chrome.scripting.executeScript`, which reads the page text and draws the result panel. It gives no site access by itself and shows no install warning. This is the one permission beyond the two in the brief. |
-
-No `host_permissions`. The extension calls only `https://generativelanguage.googleapis.com`, from the service worker. (This relies on that API allowing cross-origin requests, which is untested without a real key; see Limits.)
+| `scripting` | Needed to call `chrome.scripting.executeScript`, which reads the page text and draws the result panel. It gives no site access by itself and shows no install warning. This and `host_permissions` go beyond the two permissions in the brief. |
+| `host_permissions`: `https://generativelanguage.googleapis.com/*` | Lets the service worker call the Gemini API. This is the only site the extension can contact. It is not access to the pages you browse. **Untested with a live key**: I added it so the call does not depend on the API's CORS settings, but I have not run a real request. |
 
 ## Privacy
 

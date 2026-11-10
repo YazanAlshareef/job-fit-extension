@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "description": "Press Alt+Shift+F on a job page to see how well it fits your profile.",
   "permissions": ["activeTab", "storage", "scripting"],
+  "host_permissions": ["https://generativelanguage.googleapis.com/*"],
   "background": { "service_worker": "src/background.js", "type": "module" },
   "action": { "default_title": "Check job fit (Alt+Shift+F)" },
   "options_ui": { "page": "options.html", "open_in_tab": true },
