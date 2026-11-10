@@ -21,7 +21,7 @@ I used an AI coding assistant to draft the code, the tests and the docs, and to 
 4. Open `sample/sample-job.html` (synthetic, made up) or a real job page and press **Alt+Shift+F**. You can also click the toolbar icon. Change the shortcut at `chrome://extensions/shortcuts`.
 5. `npm run zip` builds `dist/job-fit-extension.zip` (not committed).
 
-The model name lives in `src/config.js` (`MODEL`). Google retires model names over time; change it there.
+The model name lives in `src/config.js` (`MODEL`). The default `gemini-3.5-flash-lite` is **unverified**: it comes from the docs, but I never called it with a real key. If you get an HTTP 404, pick a current model from Google's model list and change it there. Google also retires names over time.
 
 ## Permissions (each one is used)
 
