@@ -1,10 +1,10 @@
 # Walkthrough: every file in plain English
 
-**manifest.json** - The extension's ID card. Says it is Manifest V3, lists the three permissions, names the background script, the options page, the toolbar icon, and the Alt+Shift+F shortcut (called `check-fit`).
+**manifest.json** - The extension's ID card. Says it is Manifest V3, lists the permissions (including the one Gemini web address it may contact), names the background script, the options page, the toolbar icon, and the Alt+Shift+F shortcut (called `check-fit`).
 
 **src/background.js** - The service worker; the "controller". When the shortcut or icon fires, `run()` does this in order: show "Analysing..." on the page, read the page text, load the profile and key from storage, pick mock mode (no key) or Gemini (key), show the result. `readPageText` and `showPanel` are injected into the web page, so they cannot use imports. `showPanel` builds the panel with `textContent` only (never `innerHTML`) so no page or model text can run as code. Errors go to the panel and to a "!" badge.
 
-**src/gemini.js** - The adapter. The only file that knows about Gemini: builds the request, sends it with the key in a header, checks the status, pulls the text out of the reply, and hands it to the parser. To use another provider, rewrite this file only.
+**src/gemini.js** - The adapter. The only file that knows about Gemini: builds the request, sends it with the key in a header, gives up after 30 seconds with a clear message, checks the status, pulls the text out of the reply, and hands it to the parser. To use another provider, rewrite this file only.
 
 **src/core.js** - Pure logic with no browser or network, so tests can run it in Node. `clip` trims text. `findSkills` finds whole-word skills. `mockAnalyze` is the no-key scoring (matched share of job skills x 10). `buildPrompt` writes the instructions. `parseModelJson` cleans the model reply (code fences, extra text), checks it and clamps the score to 0-10.
 

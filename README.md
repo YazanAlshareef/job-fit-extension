@@ -42,7 +42,7 @@ The model name lives in `src/config.js` (`MODEL`). The default `gemini-3.5-flash
 
 ## Limits
 
-- The real Gemini call was **not tested with a real key**. The request format follows the current Gemini docs, and the code is unit-tested against a fake `fetch`. A bad key was tried and returned HTTP 400, which the panel showed correctly.
+- The real Gemini call was **not tested with a real key**. The request format follows the current Gemini docs, and the code is unit-tested against a fake `fetch`. One manual check with a fake key showed an error panel reading HTTP 400. I did not keep a log of it, so treat it as a one-off observation. The request waits at most 30 seconds, then shows a timeout message.
 - The score is a model opinion on text. The job page text is untrusted: a page could try to trick the model. The prompt tells the model to ignore instructions in it, and results are drawn as plain text, but the score can still be wrong.
 - Mock mode knows about 34 skills only.
 - Only visible text of the top page is read (not iframes). Long pages are cut.
