@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Job Fit Checker",
+  "version": "0.1.0",
+  "description": "Press Alt+Shift+F on a job page to see how well it fits your profile.",
+  "permissions": ["activeTab", "storage", "scripting"],
+  "background": { "service_worker": "src/background.js", "type": "module" },
+  "action": { "default_title": "Check job fit (Alt+Shift+F)" },
+  "options_ui": { "page": "options.html", "open_in_tab": true },
+  "commands": {
+    "check-fit": {
+      "suggested_key": { "default": "Alt+Shift+F" },
+      "description": "Check how well this job page fits your profile"
+    }
+  }
+}
