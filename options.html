@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Job Fit Checker options</title>
+  <style>
+    body { font: 15px/1.4 system-ui, sans-serif; max-width: 640px; margin: 24px auto; padding: 0 12px; }
+    label { display: block; margin-top: 16px; font-weight: bold; }
+    input, textarea { width: 100%; box-sizing: border-box; font: inherit; }
+    textarea { height: 220px; }
+    button { margin-top: 16px; font: inherit; padding: 6px 14px; }
+    small { color: #555; }
+  </style>
+</head>
+<body>
+  <h1>Job Fit Checker</h1>
+  <p>Shortcut: <b>Alt+Shift+F</b> on a job page. Change it at chrome://extensions/shortcuts.</p>
+
+  <label for="apiKey">Gemini API key</label>
+  <input id="apiKey" type="password" autocomplete="off" placeholder="Leave empty for mock mode">
+  <small>Stored only in this browser (chrome.storage.local). Empty = mock mode, no network call.</small>
+
+  <label for="profile">Your profile</label>
+  <textarea id="profile" placeholder="Skills, projects, education, experience. Plain text."></textarea>
+  <small>Sent to Gemini together with the job text when a key is set.</small>
+
+  <div><button id="save">Save</button> <span id="status" role="status"></span></div>
+  <script src="options.js"></script>
+</body>
+</html>
