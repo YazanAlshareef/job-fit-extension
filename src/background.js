@@ -65,11 +65,16 @@ async function run(tab) {
       ? await analyzeWithGemini(jobText, profile, apiKey)
       : mockAnalyze(jobText, profile);
     await inject(tab.id, showPanel, [{ status: "done", result }]);
+    chrome.action.setBadgeText({ tabId: tab.id, text: "" });
   } catch (e) {
     console.error("Job Fit Checker:", e.message);
     // Pages like chrome:// block injection, so the panel itself may be impossible. Badge is the fallback.
     chrome.action.setBadgeText({ tabId: tab.id, text: "!" });
-    try { await inject(tab.id, showPanel, [{ status: "error", message: e.message }]); } catch {}
+    try {
+      await inject(tab.id, showPanel, [{ status: "error", message: e.message }]);
+    } catch (e2) {
+      console.error("Job Fit Checker: could not show the error panel:", e2.message);
+    }
   }
 }
 
